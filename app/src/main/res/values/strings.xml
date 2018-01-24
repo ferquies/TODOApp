@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">TODOApp</string>
+  <string name="no_todos">You do not have any TODO yet</string>
+  <string name="new_todo">New TODO</string>
+  <string name="edit_todo">Edit TODO</string>
+  <string name="title">Title</string>
+  <string name="detail">Detail</string>
+  <string name="save">Save</string>
+</resources>
