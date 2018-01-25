@@ -1,7 +1,7 @@
 package com.example.ferquies.todoapp.data
 
 import android.arch.lifecycle.LiveData
-import com.example.ferquies.todoapp.data.database.travel.TodoDao
+import com.example.ferquies.todoapp.data.database.todo.TodoDao
 import com.example.ferquies.todoapp.domain.database.Todo
 import java.util.concurrent.Executor
 import javax.inject.Inject

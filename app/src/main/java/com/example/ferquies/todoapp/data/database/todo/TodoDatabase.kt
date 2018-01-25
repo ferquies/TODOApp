@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.data.database.travel
+package com.example.ferquies.todoapp.data.database.todo
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
@@ -10,7 +10,7 @@ import com.example.ferquies.todoapp.domain.database.Todo
  * Twitter: @ferquies
  * 1/21/18
  */
-@Database(entities = [Todo::class], version = 1)
+@Database(entities = [Todo::class], version = 2)
 abstract class TodoDatabase : RoomDatabase() {
-    abstract fun travelDao(): TodoDao
+    abstract fun todoDao(): TodoDao
 }

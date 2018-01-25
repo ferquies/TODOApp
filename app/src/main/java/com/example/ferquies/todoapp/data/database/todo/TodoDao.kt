@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.data.database.travel
+package com.example.ferquies.todoapp.data.database.todo
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao

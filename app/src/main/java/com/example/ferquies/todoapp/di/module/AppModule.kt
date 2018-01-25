@@ -3,8 +3,9 @@ package com.example.ferquies.todoapp.di.module
 import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.example.ferquies.todoapp.data.database.travel.TodoDao
-import com.example.ferquies.todoapp.data.database.travel.TodoDatabase
+import com.example.ferquies.todoapp.data.database.migration.Migration_1_2
+import com.example.ferquies.todoapp.data.database.todo.TodoDao
+import com.example.ferquies.todoapp.data.database.todo.TodoDatabase
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.Executor
@@ -27,11 +28,11 @@ class AppModule {
     @Singleton
     @Provides
     fun provideTodoDatabase(app: Application): TodoDatabase = Room.databaseBuilder(app,
-            TodoDatabase::class.java, "todo.db").build()
+            TodoDatabase::class.java, "todo.db").addMigrations(Migration_1_2()).build()
 
     @Singleton
     @Provides
-    fun provideTravelDao(todoDatabase: TodoDatabase): TodoDao = todoDatabase.travelDao()
+    fun provideTravelDao(todoDatabase: TodoDatabase): TodoDao = todoDatabase.todoDao()
 
     @Singleton
     @Provides

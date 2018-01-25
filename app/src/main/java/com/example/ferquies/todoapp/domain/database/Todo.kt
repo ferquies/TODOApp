@@ -15,7 +15,8 @@ data class Todo(
         @PrimaryKey(autoGenerate = true)
         val id: Int = 0,
         val title: String,
-        val detail: String) {
+        val detail: String,
+        val status: Int? = 0) {
     @Ignore
-    constructor() : this(title = "", detail = "")
+    constructor() : this(title = "", detail = "", status = 0)
 }
