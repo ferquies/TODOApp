@@ -103,4 +103,9 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
     override fun onItemClick(todo: Todo) {
         viewModel.onTodoItemClick(todo.id)
     }
+
+    override fun onItemLongClick(todo: Todo): Boolean {
+        viewModel.onItemLongClick(todo)
+        return true
+    }
 }

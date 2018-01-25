@@ -16,7 +16,7 @@ import javax.inject.Inject
  * Twitter: @ferquies
  * 1/21/18
  */
-class TodoListAdapter @Inject constructor(val callback: TodoListAdapter.Callback) :
+class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.Callback) :
         RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
 
     var todoList: List<Todo> = ArrayList()
@@ -38,9 +38,11 @@ class TodoListAdapter @Inject constructor(val callback: TodoListAdapter.Callback
 
     interface Callback {
         fun onItemClick(todo: Todo)
+
+        fun onItemLongClick(todo: Todo): Boolean
     }
 
-    class TodoViewHolder(var view: View, val callback: TodoListAdapter.Callback) :
+    class TodoViewHolder(private var view: View, private val callback: TodoListAdapter.Callback) :
             RecyclerView.ViewHolder(view) {
 
         fun bind(todo: Todo) {
@@ -48,6 +50,9 @@ class TodoListAdapter @Inject constructor(val callback: TodoListAdapter.Callback
             view.todoDetail.text = todo.detail
             view.setOnClickListener {
                 callback.onItemClick(todo)
+            }
+            view.setOnLongClickListener {
+                callback.onItemLongClick(todo)
             }
         }
     }
