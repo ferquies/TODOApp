@@ -1,7 +1,7 @@
 package com.example.ferquies.todoapp.di.module
 
-import com.example.ferquies.todoapp.view.profile.HomeActivity
-import com.example.ferquies.todoapp.view.profile.HomeFragmentProvider
+import com.example.ferquies.todoapp.view.home.HomeActivity
+import com.example.ferquies.todoapp.view.home.HomeFragmentProvider
 import com.example.ferquies.todoapp.view.detail.DetailActivity
 import com.example.ferquies.todoapp.view.detail.DetailFragmentProvider
 import dagger.Module

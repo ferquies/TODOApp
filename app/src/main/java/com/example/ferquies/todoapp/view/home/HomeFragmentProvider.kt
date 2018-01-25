@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.profile
+package com.example.ferquies.todoapp.view.home
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -11,6 +11,6 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class HomeFragmentProvider {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [HomeFragmentModule::class])
     abstract fun provideHomeFragment(): HomeFragment
 }

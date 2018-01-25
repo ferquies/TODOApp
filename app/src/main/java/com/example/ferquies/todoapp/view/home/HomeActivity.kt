@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.profile
+package com.example.ferquies.todoapp.view.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

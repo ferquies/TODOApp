@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.profile.adapter
+package com.example.ferquies.todoapp.view.home.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -16,12 +16,10 @@ import javax.inject.Inject
  * Twitter: @ferquies
  * 1/21/18
  */
-class TodoListAdapter @Inject constructor() :
+class TodoListAdapter @Inject constructor(val callback: TodoListAdapter.Callback) :
         RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
 
-    lateinit var callback: TodoListAdapter.Callback
-
-    var travelsList: List<Todo> = ArrayList()
+    var todoList: List<Todo> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -32,10 +30,10 @@ class TodoListAdapter @Inject constructor() :
         return TodoViewHolder(inflatedView, callback)
     }
 
-    override fun getItemCount() = travelsList.size
+    override fun getItemCount() = todoList.size
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.bind(travelsList[position])
+        holder.bind(todoList[position])
     }
 
     interface Callback {

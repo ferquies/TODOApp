@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.profile
+package com.example.ferquies.todoapp.view.home
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

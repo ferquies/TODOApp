@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ferquies.todoapp.view.profile.HomeActivity"
+    tools:context="com.example.ferquies.todoapp.view.home.HomeActivity"
     >
 
   <fragment
       android:id="@+id/fragment"
-      android:name="com.example.ferquies.todoapp.view.profile.HomeFragment"
+      android:name="com.example.ferquies.todoapp.view.home.HomeFragment"
       android:layout_width="0dp"
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"

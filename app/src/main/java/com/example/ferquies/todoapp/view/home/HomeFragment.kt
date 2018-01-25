@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.profile
+package com.example.ferquies.todoapp.view.home
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -15,7 +15,7 @@ import com.example.ferquies.todoapp.domain.database.Todo
 import com.example.ferquies.todoapp.domain.home.HomeNavigation
 import com.example.ferquies.todoapp.domain.home.HomeViewState
 import com.example.ferquies.todoapp.view.detail.DetailActivity
-import com.example.ferquies.todoapp.view.profile.adapter.TodoListAdapter
+import com.example.ferquies.todoapp.view.home.adapter.TodoListAdapter
 import kotlinx.android.synthetic.main.fragment_home.addTodoButton
 import kotlinx.android.synthetic.main.fragment_home.noTodos
 import kotlinx.android.synthetic.main.fragment_home.todoList
@@ -65,7 +65,6 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
             }
         })
 
-        adapter.callback = this
         todoList.layoutManager = LinearLayoutManager(activity)
         todoList.adapter = adapter
 
@@ -84,7 +83,7 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
             }
         }
 
-        adapter.travelsList = viewState.todos
+        adapter.todoList = viewState.todos
     }
 
     private fun hookEvents() {
