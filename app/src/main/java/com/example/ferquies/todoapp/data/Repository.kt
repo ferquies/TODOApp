@@ -17,9 +17,9 @@ import javax.inject.Singleton
 class Repository @Inject constructor(private val todoDao: TodoDao,
         private val executor: Executor) {
 
-    fun getTodos(): LiveData<List<Todo>> = todoDao.getTravels()
+    fun getTodos(): LiveData<List<Todo>> = todoDao.getTodos()
 
-    fun getTodo(id: Int): LiveData<Todo> = todoDao.getTravel(id)
+    fun getTodo(id: Int): LiveData<Todo> = todoDao.getTodo(id)
 
     fun addTodo(todo: Todo) = executor.execute { todoDao.insert(todo) }
 
