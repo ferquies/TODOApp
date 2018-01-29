@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -107,5 +108,11 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
     override fun onItemLongClick(todo: Todo): Boolean {
         viewModel.onItemLongClick(todo)
         return true
+    }
+
+    companion object {
+        fun newInstance(): Fragment {
+            return HomeFragment()
+        }
     }
 }

@@ -11,6 +11,7 @@ import com.example.ferquies.todoapp.base.inTransaction
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.generic_activity.toolbar
 import javax.inject.Inject
 
 class DetailActivity : BaseActivity(), HasSupportFragmentInjector {
@@ -20,7 +21,7 @@ class DetailActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.generic_activity)
 
         if (savedInstanceState?.get(TODO_DETAIL_ARG) != null) {
             intent.putExtra(TODO_DETAIL_ARG, savedInstanceState.get(TODO_DETAIL_ARG) as Int)
@@ -42,6 +43,7 @@ class DetailActivity : BaseActivity(), HasSupportFragmentInjector {
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
 
     private fun initializeView() {
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.inTransaction {
             replace(R.id.container, DetailFragment.newInstance(obtainTodoId()))
