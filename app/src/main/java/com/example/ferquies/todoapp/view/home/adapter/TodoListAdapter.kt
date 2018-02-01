@@ -8,6 +8,7 @@ import com.example.ferquies.todoapp.base.inflate
 import com.example.ferquies.todoapp.domain.database.Todo
 import kotlinx.android.synthetic.main.todo_item.view.todoDetail
 import kotlinx.android.synthetic.main.todo_item.view.todoTitle
+import java.util.Collections
 import javax.inject.Inject
 
 /**
@@ -17,13 +18,9 @@ import javax.inject.Inject
  * 1/21/18
  */
 class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.Callback) :
-        RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
+        RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>(), ItemTouchHelperAdapter {
 
-    var todoList: List<Todo> = ArrayList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private var todoList: MutableList<Todo> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val inflatedView = parent.inflate(R.layout.todo_item, false)
@@ -36,10 +33,37 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
         holder.bind(todoList[position])
     }
 
+    override fun onItemDismiss(position: Int) {
+        val todo = todoList[position]
+        todoList.removeAt(position)
+        notifyItemRemoved(position)
+        callback.onItemDismiss(todo)
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(todoList, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(todoList, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    fun setItems(todoList: List<Todo>) {
+        if (this.todoList != todoList) {
+            this.todoList = todoList.toMutableList()
+            notifyDataSetChanged()
+        }
+    }
+
     interface Callback {
         fun onItemClick(todo: Todo)
 
-        fun onItemLongClick(todo: Todo): Boolean
+        fun onItemDismiss(todo: Todo): Boolean
     }
 
     class TodoViewHolder(private var view: View, private val callback: TodoListAdapter.Callback) :
@@ -50,9 +74,6 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
             view.todoDetail.text = todo.detail
             view.setOnClickListener {
                 callback.onItemClick(todo)
-            }
-            view.setOnLongClickListener {
-                callback.onItemLongClick(todo)
             }
         }
     }

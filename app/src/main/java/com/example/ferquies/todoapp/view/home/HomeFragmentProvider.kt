@@ -1,5 +1,6 @@
 package com.example.ferquies.todoapp.view.home
 
+import com.example.ferquies.todoapp.di.scope.ActivityScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,5 +13,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class HomeFragmentProvider {
     @ContributesAndroidInjector(modules = [HomeFragmentModule::class])
+    @ActivityScope
     abstract fun provideHomeFragment(): HomeFragment
 }

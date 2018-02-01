@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,9 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
     @Inject
     lateinit var adapter: TodoListAdapter
 
+    @Inject
+    lateinit var touchHelper: ItemTouchHelper
+
     private lateinit var viewModel: HomeFragmentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +72,7 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
 
         todoList.layoutManager = LinearLayoutManager(activity)
         todoList.adapter = adapter
+        touchHelper.attachToRecyclerView(todoList)
 
         hookEvents()
     }
@@ -84,7 +89,7 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
             }
         }
 
-        adapter.todoList = viewState.todos
+        adapter.setItems(viewState.todos)
     }
 
     private fun hookEvents() {
@@ -105,7 +110,7 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
         viewModel.onTodoItemClick(todo.id)
     }
 
-    override fun onItemLongClick(todo: Todo): Boolean {
+    override fun onItemDismiss(todo: Todo): Boolean {
         viewModel.onItemLongClick(todo)
         return true
     }
