@@ -34,6 +34,10 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) :
     }
 
     override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
-        adapter.onItemDismiss(viewHolder.adapterPosition)
+        if (direction == ItemTouchHelper.END) {
+            adapter.onItemNextState(viewHolder.adapterPosition)
+        } else {
+            adapter.onItemDismiss(viewHolder.adapterPosition)
+        }
     }
 }

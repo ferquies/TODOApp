@@ -44,10 +44,13 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
 
     private fun getCurrentViewState() = viewState.value!!
 
-    private fun updateViewState(travelsList: List<Todo>?): LiveData<HomeViewState> {
-        val isEmptyList = travelsList?.isEmpty() ?: true
-        viewState.value = getCurrentViewState().copy(isEmptyList = isEmptyList,
-                todos = travelsList ?: ArrayList())
+    private fun updateViewState(tasksList: List<Todo>?): LiveData<HomeViewState> {
+        if (getCurrentViewState().todos != tasksList) {
+            val isEmptyList = tasksList?.isEmpty() ?: true
+            viewState.value = getCurrentViewState().copy(isEmptyList = isEmptyList,
+                    todos = tasksList ?: ArrayList())
+        }
+
         return viewState
     }
 }

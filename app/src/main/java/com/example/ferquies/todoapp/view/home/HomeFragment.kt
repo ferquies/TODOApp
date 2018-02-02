@@ -65,8 +65,8 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
 
         viewModel.navigationAction.observe(this, Observer {
             when (it) {
-                is HomeNavigation.AddTodo -> navigateToAddTravel()
-                is HomeNavigation.Detail -> navigateToTravelDetail(it.todoId)
+                is HomeNavigation.AddTodo -> navigateToAddTask()
+                is HomeNavigation.Detail -> navigateToTaskDetail(it.todoId)
             }
         })
 
@@ -98,12 +98,12 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
         }
     }
 
-    private fun navigateToAddTravel() {
+    private fun navigateToAddTask() {
         startActivity(DetailActivity.newIntent(applicationContext))
     }
 
-    private fun navigateToTravelDetail(travelId: Int) {
-        startActivity(DetailActivity.newIntent(applicationContext, travelId))
+    private fun navigateToTaskDetail(taskId: Int) {
+        startActivity(DetailActivity.newIntent(applicationContext, taskId))
     }
 
     override fun onItemClick(todo: Todo) {
@@ -112,6 +112,10 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
 
     override fun onItemDismiss(todo: Todo): Boolean {
         viewModel.onItemLongClick(todo)
+        return true
+    }
+
+    override fun onItemNextState(todo: Todo): Boolean {
         return true
     }
 

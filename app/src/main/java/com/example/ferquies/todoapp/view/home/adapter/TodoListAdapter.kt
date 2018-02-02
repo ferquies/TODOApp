@@ -40,6 +40,13 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
         callback.onItemDismiss(todo)
     }
 
+    override fun onItemNextState(position: Int) {
+        val todo = todoList[position]
+        todoList.removeAt(position)
+        notifyItemRemoved(position)
+        callback.onItemNextState(todo)
+    }
+
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
@@ -64,6 +71,8 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
         fun onItemClick(todo: Todo)
 
         fun onItemDismiss(todo: Todo): Boolean
+
+        fun onItemNextState(todo: Todo): Boolean
     }
 
     class TodoViewHolder(private var view: View, private val callback: TodoListAdapter.Callback) :
