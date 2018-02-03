@@ -29,15 +29,15 @@ class DetailFragmentViewModel @Inject constructor(private val repository: Reposi
     }
 
     fun getViewState(): LiveData<DetailViewState> = Transformations.switchMap(
-            repository.getTodo(todoId), this::updateViewState)
+            repository.getTask(todoId), this::updateViewState)
 
     fun saveTodo(title: String, detail: String) {
-        repository.addTodo(Todo(title = title, detail = detail))
+        repository.addTask(Todo(title = title, detail = detail))
         navigationAction.sendAction(DetailNavigation.Back())
     }
 
     fun updateTodo(todo: Todo) {
-        repository.updateTodo(todo)
+        repository.updateTask(todo)
         navigationAction.sendAction(DetailNavigation.Back())
     }
 

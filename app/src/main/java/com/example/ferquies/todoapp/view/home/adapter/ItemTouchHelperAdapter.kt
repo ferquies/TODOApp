@@ -1,7 +1,5 @@
 package com.example.ferquies.todoapp.view.home.adapter
 
-import android.content.res.Resources
-
 /**
  * Created by Fernando Q. Esquitino
  * Email: ferquies@gmail.com
@@ -14,6 +12,4 @@ interface ItemTouchHelperAdapter {
     fun onItemDismiss(position: Int)
 
     fun onItemNextState(position: Int)
-
-    fun getResources(): Resources
 }

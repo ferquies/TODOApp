@@ -36,11 +36,11 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
     }
 
     fun onItemLongClick(todo: Todo) {
-        repository.deleteTodo(todo)
+        repository.deleteTask(todo)
     }
 
     fun getViewState(): LiveData<HomeViewState> = Transformations.switchMap(
-            repository.getTodos(), this::updateViewState)
+            repository.getTasks(0), this::updateViewState)
 
     private fun getCurrentViewState() = viewState.value!!
 
@@ -52,5 +52,9 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
         }
 
         return viewState
+    }
+
+    fun onTaskNextState(todo: Todo) {
+        repository.updateTask(todo.copy(status = 1))
     }
 }

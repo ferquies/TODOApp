@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.example.ferquies.todoapp.data.database.migration.Migration_1_2
+import com.example.ferquies.todoapp.data.database.migration.Migration_2_3
 import com.example.ferquies.todoapp.data.database.todo.TodoDao
 import com.example.ferquies.todoapp.data.database.todo.TodoDatabase
 import dagger.Module
@@ -28,7 +29,8 @@ class AppModule {
     @Singleton
     @Provides
     fun provideTodoDatabase(app: Application): TodoDatabase = Room.databaseBuilder(app,
-            TodoDatabase::class.java, "todo.db").addMigrations(Migration_1_2()).build()
+            TodoDatabase::class.java, "todo.db").addMigrations(Migration_1_2())
+            .addMigrations(Migration_2_3()).build()
 
     @Singleton
     @Provides

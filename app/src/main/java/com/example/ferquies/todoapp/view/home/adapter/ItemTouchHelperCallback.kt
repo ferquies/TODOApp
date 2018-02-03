@@ -1,5 +1,6 @@
 package com.example.ferquies.todoapp.view.home.adapter
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.ferquies.todoapp.R
+import javax.inject.Inject
 
 /**
  * Created by Fernando Q. Esquitino
@@ -17,7 +19,8 @@ import com.example.ferquies.todoapp.R
  * Twitter: @ferquies
  * 2/1/18
  */
-class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) :
+class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
+        private val context: Context) :
         ItemTouchHelper.Callback() {
 
     private val paint = Paint()
@@ -50,7 +53,7 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) :
         }
     }
 
-    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView?, viewHolder: ViewHolder,
+    override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView?, viewHolder: ViewHolder,
             dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
         val icon: Bitmap
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
@@ -64,26 +67,27 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) :
                 val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(),
                         itemView.right.toFloat() + dX,
                         itemView.bottom.toFloat())
-                c.drawRect(background, paint)
-                icon = BitmapFactory.decodeResource(adapter.getResources(), R.drawable.ic_menu_send)
+                canvas.drawRect(background, paint)
+                icon = BitmapFactory.decodeResource(context.resources,
+                        R.drawable.arrow_right_bold)
                 val iconDest = RectF(itemView.left.toFloat() + width,
                         itemView.top.toFloat() + width,
                         itemView.left.toFloat() + 2 * width, itemView.bottom.toFloat() - width)
-                c.drawBitmap(icon, null, iconDest, paint)
+                canvas.drawBitmap(icon, null, iconDest, paint)
             } else {
                 paint.color = Color.parseColor("#D32F2F")
                 val background = RectF(itemView.right.toFloat() + dX, itemView.top.toFloat(),
                         itemView.right.toFloat(), itemView.bottom.toFloat())
-                c.drawRect(background, paint)
-                icon = BitmapFactory.decodeResource(adapter.getResources(),
-                        R.drawable.ic_menu_share)
+                canvas.drawRect(background, paint)
+                icon = BitmapFactory.decodeResource(context.resources,
+                        R.drawable.delete)
                 val iconDest = RectF(itemView.right.toFloat() - 2 * width,
                         itemView.top.toFloat() + width, itemView.right.toFloat() - width,
                         itemView.bottom.toFloat() - width)
-                c.drawBitmap(icon, null, iconDest, paint)
+                canvas.drawBitmap(icon, null, iconDest, paint)
             }
         }
 
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 }

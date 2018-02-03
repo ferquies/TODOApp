@@ -117,6 +117,7 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
     }
 
     override fun onItemNextState(todo: Todo): Boolean {
+        viewModel.onTaskNextState(todo)
         return true
     }
 

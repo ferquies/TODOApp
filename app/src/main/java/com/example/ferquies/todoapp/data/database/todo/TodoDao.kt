@@ -14,9 +14,9 @@ import com.example.ferquies.todoapp.domain.database.Todo
  */
 @Dao
 abstract class TodoDao : BaseDao<Todo> {
-    @Query("SELECT * FROM Todo")
-    abstract fun getTodos(): LiveData<List<Todo>>
+    @Query("SELECT * FROM Todo WHERE status = :status ORDER BY sequence")
+    abstract fun getTasks(status: Int): LiveData<List<Todo>>
 
     @Query("SELECT * FROM Todo WHERE id = :id")
-    abstract fun getTodo(id: Int): LiveData<Todo>
+    abstract fun getTask(id: Int): LiveData<Todo>
 }

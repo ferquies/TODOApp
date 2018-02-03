@@ -1,6 +1,7 @@
 package com.example.ferquies.todoapp.di.component
 
 import android.app.Application
+import android.content.Context
 import com.example.ferquies.todoapp.App
 import com.example.ferquies.todoapp.di.module.ActivityBuilderModule
 import com.example.ferquies.todoapp.di.module.AppModule
@@ -31,4 +32,5 @@ interface AppComponent {
 
     fun inject(app: App)
 
+    fun provideContext(): Context
 }

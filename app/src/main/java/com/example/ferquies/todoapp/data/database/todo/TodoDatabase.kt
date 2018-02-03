@@ -10,7 +10,7 @@ import com.example.ferquies.todoapp.domain.database.Todo
  * Twitter: @ferquies
  * 1/21/18
  */
-@Database(entities = [Todo::class], version = 2)
+@Database(entities = [Todo::class], version = 3)
 abstract class TodoDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
 }

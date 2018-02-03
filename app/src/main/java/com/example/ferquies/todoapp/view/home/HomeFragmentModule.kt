@@ -1,5 +1,6 @@
 package com.example.ferquies.todoapp.view.home
 
+import android.content.Context
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.ferquies.todoapp.di.scope.ActivityScope
 import com.example.ferquies.todoapp.view.home.adapter.ItemTouchHelperCallback
@@ -23,8 +24,9 @@ class HomeFragmentModule {
 
     @Provides
     @ActivityScope
-    fun providesItemTouchHelperCallback(adapter: TodoListAdapter): ItemTouchHelperCallback {
-        return ItemTouchHelperCallback(adapter)
+    fun providesItemTouchHelperCallback(adapter: TodoListAdapter,
+            context: Context): ItemTouchHelperCallback {
+        return ItemTouchHelperCallback(adapter, context)
     }
 
     @Provides

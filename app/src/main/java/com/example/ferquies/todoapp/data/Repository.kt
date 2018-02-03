@@ -17,14 +17,14 @@ import javax.inject.Singleton
 class Repository @Inject constructor(private val todoDao: TodoDao,
         private val executor: Executor) {
 
-    fun getTodos(): LiveData<List<Todo>> = todoDao.getTodos()
+    fun getTasks(status: Int): LiveData<List<Todo>> = todoDao.getTasks(status)
 
-    fun getTodo(id: Int): LiveData<Todo> = todoDao.getTodo(id)
+    fun getTask(id: Int): LiveData<Todo> = todoDao.getTask(id)
 
-    fun addTodo(todo: Todo) = executor.execute { todoDao.insert(todo) }
+    fun addTask(task: Todo) = executor.execute { todoDao.insert(task) }
 
-    fun updateTodo(todo: Todo) = executor.execute { todoDao.update(todo) }
+    fun updateTask(task: Todo) = executor.execute { todoDao.update(task) }
 
-    fun deleteTodo(todo: Todo) = executor.execute { todoDao.delete(todo) }
+    fun deleteTask(task: Todo) = executor.execute { todoDao.delete(task) }
 
 }

@@ -16,7 +16,8 @@ data class Todo(
         val id: Int = 0,
         val title: String,
         val detail: String,
-        val status: Int? = 0) {
+        val status: Int? = 0,
+        val sequence: Int? = Int.MAX_VALUE) {
     @Ignore
-    constructor() : this(title = "", detail = "", status = 0)
+    constructor() : this(title = "", detail = "")
 }

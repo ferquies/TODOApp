@@ -14,3 +14,10 @@ class Migration_1_2 : Migration(1, 2) {
         database.execSQL("ALTER TABLE Todo ADD COLUMN status INTEGER")
     }
 }
+
+class Migration_2_3 : Migration(2, 3) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE Todo ADD COLUMN sequence INTEGER")
+        database.execSQL("UPDATE Todo SET sequence = ${Int.MAX_VALUE}")
+    }
+}
