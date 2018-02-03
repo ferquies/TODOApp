@@ -121,6 +121,10 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
         return true
     }
 
+    override fun onItemMoved(task: Todo) {
+        viewModel.changePosition(task)
+    }
+
     companion object {
         fun newInstance(): Fragment {
             return HomeFragment()

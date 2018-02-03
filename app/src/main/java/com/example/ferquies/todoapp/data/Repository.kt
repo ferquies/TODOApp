@@ -6,6 +6,8 @@ import com.example.ferquies.todoapp.domain.database.Todo
 import java.util.concurrent.Executor
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Created by Fernando Q. Esquitino
@@ -27,4 +29,27 @@ class Repository @Inject constructor(private val todoDao: TodoDao,
 
     fun deleteTask(task: Todo) = executor.execute { todoDao.delete(task) }
 
+    private fun getTaskNoLive(id: Int): Todo = todoDao.getTaskNoLive(id)
+
+    private fun getTasksToOrder(oldPosition: Int, newPosition: Int): List<Todo> {
+        return todoDao.getTasksToOrder(oldPosition, newPosition)
+    }
+
+    fun changeOrder(task: Todo) {
+        executor.execute {
+            val oldPosition = getTaskNoLive(task.id).sequence!!
+            val newPosition = task.sequence!!
+            val tasksToOrder = getTasksToOrder(min(oldPosition, newPosition),
+                    max(oldPosition, newPosition))
+
+            for (taskToOrder in tasksToOrder) {
+                if (taskToOrder.id == task.id) {
+                    updateTask(task)
+                } else {
+                    val newSequence = if (oldPosition > newPosition) taskToOrder.sequence!! + 1 else taskToOrder.sequence!! - 1
+                    updateTask(taskToOrder.copy(sequence = newSequence))
+                }
+            }
+        }
+    }
 }

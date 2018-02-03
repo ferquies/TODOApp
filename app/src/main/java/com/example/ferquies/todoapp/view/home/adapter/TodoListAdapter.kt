@@ -1,7 +1,7 @@
 package com.example.ferquies.todoapp.view.home.adapter
 
-import android.content.res.Resources
 import android.support.v7.widget.RecyclerView
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.example.ferquies.todoapp.R
@@ -58,6 +58,7 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
                 Collections.swap(todoList, i, i - 1)
             }
         }
+        callback.onItemMoved(todoList[toPosition].copy(sequence = toPosition))
         notifyItemMoved(fromPosition, toPosition)
     }
 
@@ -74,6 +75,8 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
         fun onItemDismiss(todo: Todo): Boolean
 
         fun onItemNextState(todo: Todo): Boolean
+
+        fun onItemMoved(task: Todo)
     }
 
     class TodoViewHolder(private var view: View, private val callback: TodoListAdapter.Callback) :

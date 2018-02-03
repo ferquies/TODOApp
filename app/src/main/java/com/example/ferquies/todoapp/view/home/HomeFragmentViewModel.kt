@@ -10,6 +10,8 @@ import com.example.ferquies.todoapp.domain.database.Todo
 import com.example.ferquies.todoapp.domain.home.HomeNavigation
 import com.example.ferquies.todoapp.domain.home.HomeViewState
 import javax.inject.Inject
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Created by Fernando Q. Esquitino
@@ -56,5 +58,9 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
 
     fun onTaskNextState(todo: Todo) {
         repository.updateTask(todo.copy(status = 1))
+    }
+
+    fun changePosition(task: Todo) {
+        repository.changeOrder(task)
     }
 }
