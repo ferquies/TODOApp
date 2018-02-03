@@ -23,6 +23,6 @@ abstract class TodoDao : BaseDao<Todo> {
     @Query("SELECT * FROM Todo WHERE id = :id")
     abstract fun getTaskNoLive(id: Int): Todo
 
-    @Query("SELECT * FROM Todo WHERE sequence BETWEEN :oldPosition AND :newPosition")
-    abstract fun getTasksToOrder(oldPosition: Int, newPosition: Int): List<Todo>
+    @Query("SELECT * FROM Todo WHERE status = :status AND sequence BETWEEN :oldPosition AND :newPosition")
+    abstract fun getTasksToOrder(status: Int, oldPosition: Int, newPosition: Int): List<Todo>
 }

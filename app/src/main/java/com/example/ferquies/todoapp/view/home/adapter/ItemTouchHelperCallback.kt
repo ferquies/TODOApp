@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.ferquies.todoapp.R
-import javax.inject.Inject
 
 /**
  * Created by Fernando Q. Esquitino
@@ -24,6 +23,9 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
         ItemTouchHelper.Callback() {
 
     private val paint = Paint()
+    private var dragFrom = -1
+    private var dragTo = -1
+    private var orderChanged = false
 
     override fun isLongPressDragEnabled(): Boolean {
         return true
@@ -41,8 +43,32 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder,
             target: ViewHolder): Boolean {
-        adapter.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        val fromPosition = viewHolder.adapterPosition
+        val toPosition = target.adapterPosition
+
+        if (dragFrom == -1) {
+            dragFrom = fromPosition
+        }
+
+        dragTo = toPosition
+        orderChanged = true
+        adapter.onItemMove(fromPosition, toPosition)
+
         return true
+    }
+
+    override fun onSelectedChanged(viewHolder: ViewHolder?, actionState: Int) {
+        super.onSelectedChanged(viewHolder, actionState)
+
+        if (actionState == ItemTouchHelper.ACTION_STATE_IDLE && orderChanged) {
+            if (dragFrom != -1 && dragTo != -1 && dragFrom != dragTo) {
+                adapter.onItemEndMove(dragFrom, dragTo)
+            }
+
+            dragFrom = -1
+            dragTo = -1
+            orderChanged = false
+        }
     }
 
     override fun onSwiped(viewHolder: ViewHolder, direction: Int) {

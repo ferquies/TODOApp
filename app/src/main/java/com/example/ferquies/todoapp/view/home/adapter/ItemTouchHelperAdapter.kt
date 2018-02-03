@@ -12,4 +12,6 @@ interface ItemTouchHelperAdapter {
     fun onItemDismiss(position: Int)
 
     fun onItemNextState(position: Int)
+
+    fun onItemEndMove(fromPosition: Int, toPosition: Int)
 }

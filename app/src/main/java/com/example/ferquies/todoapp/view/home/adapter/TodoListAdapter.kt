@@ -58,8 +58,12 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
                 Collections.swap(todoList, i, i - 1)
             }
         }
-        callback.onItemMoved(todoList[toPosition].copy(sequence = toPosition))
+
         notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemEndMove(fromPosition: Int, toPosition: Int) {
+        callback.onItemMoved(todoList[toPosition].copy(sequence = toPosition))
     }
 
     fun setItems(todoList: List<Todo>) {
