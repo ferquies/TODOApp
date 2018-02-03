@@ -19,10 +19,4 @@ abstract class TodoDao : BaseDao<Todo> {
 
     @Query("SELECT * FROM Todo WHERE id = :id")
     abstract fun getTask(id: Int): LiveData<Todo>
-
-    @Query("SELECT * FROM Todo WHERE id = :id")
-    abstract fun getTaskNoLive(id: Int): Todo
-
-    @Query("SELECT * FROM Todo WHERE status = :status AND sequence BETWEEN :oldPosition AND :newPosition")
-    abstract fun getTasksToOrder(status: Int, oldPosition: Int, newPosition: Int): List<Todo>
 }
