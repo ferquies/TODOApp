@@ -121,8 +121,8 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
         return true
     }
 
-    override fun onItemMoved(task: Todo) {
-        viewModel.changePosition(task)
+    override fun onItemMoved(tasks: List<Todo>) {
+        viewModel.changePosition(tasks)
     }
 
     companion object {

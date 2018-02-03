@@ -60,7 +60,7 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
         repository.updateTask(todo.copy(status = 1))
     }
 
-    fun changePosition(task: Todo) {
-        repository.changeOrder(task)
+    fun changePosition(tasks: List<Todo>) {
+        repository.changeOrder(tasks)
     }
 }

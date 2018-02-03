@@ -23,9 +23,6 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
         ItemTouchHelper.Callback() {
 
     private val paint = Paint()
-    private var dragFrom = -1
-    private var dragTo = -1
-    private var orderChanged = false
 
     override fun isLongPressDragEnabled(): Boolean {
         return true
@@ -45,13 +42,6 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
             target: ViewHolder): Boolean {
         val fromPosition = viewHolder.adapterPosition
         val toPosition = target.adapterPosition
-
-        if (dragFrom == -1) {
-            dragFrom = fromPosition
-        }
-
-        dragTo = toPosition
-        orderChanged = true
         adapter.onItemMove(fromPosition, toPosition)
 
         return true
@@ -60,14 +50,8 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
     override fun onSelectedChanged(viewHolder: ViewHolder?, actionState: Int) {
         super.onSelectedChanged(viewHolder, actionState)
 
-        if (actionState == ItemTouchHelper.ACTION_STATE_IDLE && orderChanged) {
-            if (dragFrom != -1 && dragTo != -1 && dragFrom != dragTo) {
-                adapter.onItemEndMove(dragFrom, dragTo)
-            }
-
-            dragFrom = -1
-            dragTo = -1
-            orderChanged = false
+        if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
+                adapter.onItemEndMove()
         }
     }
 

@@ -6,8 +6,6 @@ import com.example.ferquies.todoapp.domain.database.Todo
 import java.util.concurrent.Executor
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.math.max
-import kotlin.math.min
 
 /**
  * Created by Fernando Q. Esquitino
@@ -27,37 +25,12 @@ class Repository @Inject constructor(private val todoDao: TodoDao,
 
     fun updateTask(task: Todo) = executor.execute { todoDao.update(task) }
 
-    fun deleteTask(task: Todo) {
+    fun deleteTask(task: Todo) = executor.execute { todoDao.delete(task) }
+
+    fun changeOrder(tasks: List<Todo>) {
         executor.execute {
-            todoDao.delete(task)
-            val tasksToOrder = getTasksToOrder(task.status!!, task.sequence!!, Int.MAX_VALUE)
-
-            for (taskToOrder in tasksToOrder) {
-                updateTask(taskToOrder.copy(sequence = taskToOrder.sequence!! - 1))
-            }
-        }
-    }
-
-    private fun getTaskNoLive(id: Int): Todo = todoDao.getTaskNoLive(id)
-
-    private fun getTasksToOrder(status: Int, oldPosition: Int, newPosition: Int): List<Todo> {
-        return todoDao.getTasksToOrder(status, oldPosition, newPosition)
-    }
-
-    fun changeOrder(task: Todo) {
-        executor.execute {
-            val oldPosition = getTaskNoLive(task.id).sequence!!
-            val newPosition = task.sequence!!
-            val tasksToOrder = getTasksToOrder(task.status!!, min(oldPosition, newPosition),
-                    max(oldPosition, newPosition) + 1)
-
-            for (taskToOrder in tasksToOrder) {
-                if (taskToOrder.id == task.id) {
-                    updateTask(task)
-                } else {
-                    val newSequence = if (oldPosition > newPosition) taskToOrder.sequence!! + 1 else taskToOrder.sequence!! - 1
-                    updateTask(taskToOrder.copy(sequence = newSequence))
-                }
+            for (task in tasks) {
+                updateTask(task)
             }
         }
     }

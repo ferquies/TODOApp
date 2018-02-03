@@ -62,8 +62,14 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
         notifyItemMoved(fromPosition, toPosition)
     }
 
-    override fun onItemEndMove(fromPosition: Int, toPosition: Int) {
-        callback.onItemMoved(todoList[toPosition].copy(sequence = toPosition))
+    override fun onItemEndMove() {
+        val tasks = ArrayList<Todo>()
+        for (index in 0 until todoList.size) {
+            if (todoList[index].sequence != index) {
+                tasks.add(todoList[index].copy(sequence = index))
+            }
+        }
+        callback.onItemMoved(tasks)
     }
 
     fun setItems(todoList: List<Todo>) {
@@ -80,7 +86,7 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
 
         fun onItemNextState(todo: Todo): Boolean
 
-        fun onItemMoved(task: Todo)
+        fun onItemMoved(tasks: List<Todo>)
     }
 
     class TodoViewHolder(private var view: View, private val callback: TodoListAdapter.Callback) :
