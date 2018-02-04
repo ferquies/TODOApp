@@ -23,6 +23,7 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
         ItemTouchHelper.Callback() {
 
     private val paint = Paint()
+    private var isMoving = false
 
     override fun isLongPressDragEnabled(): Boolean {
         return true
@@ -42,16 +43,18 @@ class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter,
             target: ViewHolder): Boolean {
         val fromPosition = viewHolder.adapterPosition
         val toPosition = target.adapterPosition
+        isMoving = true
         adapter.onItemMove(fromPosition, toPosition)
 
         return true
     }
 
-    override fun onSelectedChanged(viewHolder: ViewHolder?, actionState: Int) {
-        super.onSelectedChanged(viewHolder, actionState)
+    override fun clearView(recyclerView: RecyclerView?, viewHolder: ViewHolder?) {
+        super.clearView(recyclerView, viewHolder)
 
-        if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
-                adapter.onItemEndMove()
+        if (isMoving) {
+            isMoving = false
+            adapter.onItemEndMove()
         }
     }
 

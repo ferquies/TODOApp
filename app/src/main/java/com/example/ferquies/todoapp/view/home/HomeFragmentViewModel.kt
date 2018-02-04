@@ -37,7 +37,7 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
         navigationAction.sendAction(HomeNavigation.Detail(todoId))
     }
 
-    fun onItemLongClick(todo: Todo) {
+    fun onItemDelete(todo: Todo) {
         repository.deleteTask(todo)
     }
 

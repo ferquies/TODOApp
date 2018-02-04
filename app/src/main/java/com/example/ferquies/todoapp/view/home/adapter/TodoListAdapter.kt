@@ -1,7 +1,6 @@
 package com.example.ferquies.todoapp.view.home.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.example.ferquies.todoapp.R
@@ -73,10 +72,8 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
     }
 
     fun setItems(todoList: List<Todo>) {
-        if (this.todoList != todoList) {
-            this.todoList = todoList.toMutableList()
-            notifyDataSetChanged()
-        }
+        this.todoList = todoList.toMutableList()
+        notifyDataSetChanged()
     }
 
     interface Callback {
