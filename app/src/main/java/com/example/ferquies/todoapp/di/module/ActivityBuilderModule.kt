@@ -1,7 +1,7 @@
 package com.example.ferquies.todoapp.di.module
 
 import com.example.ferquies.todoapp.view.home.HomeActivity
-import com.example.ferquies.todoapp.view.home.HomeFragmentProvider
+import com.example.ferquies.todoapp.view.tasks.TasksFragmentProvider
 import com.example.ferquies.todoapp.view.detail.DetailActivity
 import com.example.ferquies.todoapp.view.detail.DetailFragmentProvider
 import dagger.Module
@@ -16,7 +16,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilderModule {
 
-    @ContributesAndroidInjector(modules = [HomeFragmentProvider::class])
+    @ContributesAndroidInjector(modules = [TasksFragmentProvider::class])
     internal abstract fun homeActivity(): HomeActivity
 
     @ContributesAndroidInjector(modules = [DetailFragmentProvider::class])

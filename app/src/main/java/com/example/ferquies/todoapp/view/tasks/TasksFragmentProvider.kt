@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.home
+package com.example.ferquies.todoapp.view.tasks
 
 import com.example.ferquies.todoapp.di.scope.ActivityScope
 import dagger.Module
@@ -11,8 +11,8 @@ import dagger.android.ContributesAndroidInjector
  * 1/20/18
  */
 @Module
-abstract class HomeFragmentProvider {
-    @ContributesAndroidInjector(modules = [HomeFragmentModule::class])
+abstract class TasksFragmentProvider {
+    @ContributesAndroidInjector(modules = [TasksFragmentModule::class])
     @ActivityScope
-    abstract fun provideHomeFragment(): HomeFragment
+    abstract fun provideHomeFragment(): TasksFragment
 }

@@ -1,10 +1,10 @@
-package com.example.ferquies.todoapp.view.home
+package com.example.ferquies.todoapp.view.tasks
 
 import android.content.Context
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.ferquies.todoapp.di.scope.ActivityScope
-import com.example.ferquies.todoapp.view.home.adapter.ItemTouchHelperCallback
-import com.example.ferquies.todoapp.view.home.adapter.TodoListAdapter
+import com.example.ferquies.todoapp.view.tasks.adapter.ItemTouchHelperCallback
+import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
 import dagger.Module
 import dagger.Provides
 
@@ -15,16 +15,16 @@ import dagger.Provides
  * 1/25/18
  */
 @Module
-class HomeFragmentModule {
+class TasksFragmentModule {
 
     @Provides
     @ActivityScope
-    fun provideTodoListAdapter(homeFragment: HomeFragment): TodoListAdapter = TodoListAdapter(
-            homeFragment)
+    fun provideTodoListAdapter(tasksFragment: TasksFragment): TaskListAdapter = TaskListAdapter(
+            tasksFragment)
 
     @Provides
     @ActivityScope
-    fun providesItemTouchHelperCallback(adapter: TodoListAdapter,
+    fun providesItemTouchHelperCallback(adapter: TaskListAdapter,
             context: Context): ItemTouchHelperCallback {
         return ItemTouchHelperCallback(adapter, context)
     }

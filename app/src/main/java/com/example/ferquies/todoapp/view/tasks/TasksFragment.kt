@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.home
+package com.example.ferquies.todoapp.view.tasks
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -17,7 +17,7 @@ import com.example.ferquies.todoapp.domain.database.Todo
 import com.example.ferquies.todoapp.domain.home.HomeNavigation
 import com.example.ferquies.todoapp.domain.home.HomeViewState
 import com.example.ferquies.todoapp.view.detail.DetailActivity
-import com.example.ferquies.todoapp.view.home.adapter.TodoListAdapter
+import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
 import kotlinx.android.synthetic.main.fragment_home.addTodoButton
 import kotlinx.android.synthetic.main.fragment_home.noTodos
 import kotlinx.android.synthetic.main.fragment_home.todoList
@@ -29,7 +29,7 @@ import javax.inject.Inject
  * Twitter: @ferquies
  * 1/20/18
  */
-class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
+class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -38,12 +38,12 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
     lateinit var applicationContext: Context
 
     @Inject
-    lateinit var adapter: TodoListAdapter
+    lateinit var adapter: TaskListAdapter
 
     @Inject
     lateinit var touchHelper: ItemTouchHelper
 
-    private lateinit var viewModel: HomeFragmentViewModel
+    private lateinit var viewModel: TasksFragmentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
@@ -57,9 +57,9 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
     }
 
     private fun initializeView() {
-        viewModel = getViewModel(HomeFragmentViewModel::class.java, viewModelFactory)
+        viewModel = getViewModel(TasksFragmentViewModel::class.java, viewModelFactory)
 
-        viewModel.getViewState().observe(this, Observer {
+        viewModel.getViewState(obtainStatus()).observe(this, Observer {
             render(it!!)
         })
 
@@ -124,9 +124,17 @@ class HomeFragment : BaseFragment(), TodoListAdapter.Callback {
         viewModel.changePosition(tasks)
     }
 
+    private fun obtainStatus() = arguments.getInt(STATUS_ARG)
+
     companion object {
-        fun newInstance(): Fragment {
-            return HomeFragment()
+        private const val STATUS_ARG = "status_arg"
+
+        fun newInstance(status: Int): Fragment {
+            val fragment = TasksFragment()
+            val bundle = Bundle()
+            bundle.putInt(STATUS_ARG, status)
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }

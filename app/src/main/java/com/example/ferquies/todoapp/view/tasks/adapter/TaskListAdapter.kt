@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.home.adapter
+package com.example.ferquies.todoapp.view.tasks.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -17,8 +17,8 @@ import javax.inject.Inject
  * Twitter: @ferquies
  * 1/21/18
  */
-class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.Callback) :
-        RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>(), ItemTouchHelperAdapter {
+class TaskListAdapter @Inject constructor(private val callback: TaskListAdapter.Callback) :
+        RecyclerView.Adapter<TaskListAdapter.TodoViewHolder>(), ItemTouchHelperAdapter {
 
     private var todoList: MutableList<Todo> = ArrayList()
 
@@ -86,7 +86,7 @@ class TodoListAdapter @Inject constructor(private val callback: TodoListAdapter.
         fun onItemMoved(tasks: List<Todo>)
     }
 
-    class TodoViewHolder(private var view: View, private val callback: TodoListAdapter.Callback) :
+    class TodoViewHolder(private var view: View, private val callback: TaskListAdapter.Callback) :
             RecyclerView.ViewHolder(view) {
 
         fun bind(todo: Todo) {

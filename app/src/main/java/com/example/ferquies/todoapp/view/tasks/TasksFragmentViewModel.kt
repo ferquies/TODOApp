@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.home
+package com.example.ferquies.todoapp.view.tasks
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -10,8 +10,6 @@ import com.example.ferquies.todoapp.domain.database.Todo
 import com.example.ferquies.todoapp.domain.home.HomeNavigation
 import com.example.ferquies.todoapp.domain.home.HomeViewState
 import javax.inject.Inject
-import kotlin.math.max
-import kotlin.math.min
 
 /**
  * Created by Fernando Q. Esquitino
@@ -19,7 +17,7 @@ import kotlin.math.min
  * Twitter: @ferquies
  * 1/20/18
  */
-class HomeFragmentViewModel @Inject constructor(private val repository: Repository) :
+class TasksFragmentViewModel @Inject constructor(private val repository: Repository) :
         ViewModel() {
 
     private val viewState: MutableLiveData<HomeViewState> = MutableLiveData()
@@ -41,8 +39,8 @@ class HomeFragmentViewModel @Inject constructor(private val repository: Reposito
         repository.deleteTask(todo)
     }
 
-    fun getViewState(): LiveData<HomeViewState> = Transformations.switchMap(
-            repository.getTasks(0), this::updateViewState)
+    fun getViewState(status: Int): LiveData<HomeViewState> = Transformations.switchMap(
+            repository.getTasks(status), this::updateViewState)
 
     private fun getCurrentViewState() = viewState.value!!
 

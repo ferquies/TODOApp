@@ -10,6 +10,7 @@ import com.example.ferquies.todoapp.R.id
 import com.example.ferquies.todoapp.R.string
 import com.example.ferquies.todoapp.base.BaseActivity
 import com.example.ferquies.todoapp.base.inTransaction
+import com.example.ferquies.todoapp.view.tasks.TasksFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -57,7 +58,8 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         initializeToolbar()
         hookMenuEvents()
         supportFragmentManager.inTransaction {
-            replace(id.container, HomeFragment.newInstance())
+            replace(id.container,
+                    TasksFragment.newInstance(0))
         }
     }
 
