@@ -14,8 +14,8 @@ import com.example.ferquies.todoapp.R
 import com.example.ferquies.todoapp.base.BaseFragment
 import com.example.ferquies.todoapp.base.getViewModel
 import com.example.ferquies.todoapp.domain.database.Todo
-import com.example.ferquies.todoapp.domain.home.HomeNavigation
-import com.example.ferquies.todoapp.domain.home.HomeViewState
+import com.example.ferquies.todoapp.domain.home.TasksNavigation
+import com.example.ferquies.todoapp.domain.home.TasksViewState
 import com.example.ferquies.todoapp.view.detail.DetailActivity
 import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
 import kotlinx.android.synthetic.main.fragment_home.addTodoButton
@@ -65,8 +65,8 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
 
         viewModel.navigationAction.observe(this, Observer {
             when (it) {
-                is HomeNavigation.AddTodo -> navigateToAddTask()
-                is HomeNavigation.Detail -> navigateToTaskDetail(it.todoId)
+                is TasksNavigation.AddTask -> navigateToAddTask()
+                is TasksNavigation.Detail -> navigateToTaskDetail(it.taskId)
             }
         })
 
@@ -77,7 +77,7 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
         hookEvents()
     }
 
-    private fun render(viewState: HomeViewState) {
+    private fun render(viewState: TasksViewState) {
         when (viewState.isEmptyList) {
             true -> {
                 noTodos.visibility = View.VISIBLE
@@ -89,7 +89,7 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
             }
         }
 
-        adapter.setItems(viewState.todos)
+        adapter.setItems(viewState.tasks)
     }
 
     private fun hookEvents() {

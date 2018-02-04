@@ -6,8 +6,8 @@ package com.example.ferquies.todoapp.domain.home
  * Twitter: @ferquies
  * 1/21/18
  */
-sealed class HomeNavigation {
-    class AddTodo : HomeNavigation()
+sealed class TasksNavigation {
+    class AddTask : TasksNavigation()
 
-    class Detail constructor(val todoId: Int) : HomeNavigation()
+    class Detail constructor(val taskId: Int) : TasksNavigation()
 }

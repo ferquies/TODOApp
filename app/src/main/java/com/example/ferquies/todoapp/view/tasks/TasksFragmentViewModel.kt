@@ -7,8 +7,8 @@ import android.arch.lifecycle.ViewModel
 import com.example.ferquies.todoapp.base.ActionLiveData
 import com.example.ferquies.todoapp.data.Repository
 import com.example.ferquies.todoapp.domain.database.Todo
-import com.example.ferquies.todoapp.domain.home.HomeNavigation
-import com.example.ferquies.todoapp.domain.home.HomeViewState
+import com.example.ferquies.todoapp.domain.home.TasksNavigation
+import com.example.ferquies.todoapp.domain.home.TasksViewState
 import javax.inject.Inject
 
 /**
@@ -20,35 +20,35 @@ import javax.inject.Inject
 class TasksFragmentViewModel @Inject constructor(private val repository: Repository) :
         ViewModel() {
 
-    private val viewState: MutableLiveData<HomeViewState> = MutableLiveData()
-    val navigationAction = ActionLiveData<HomeNavigation>()
+    private val viewState: MutableLiveData<TasksViewState> = MutableLiveData()
+    val navigationAction = ActionLiveData<TasksNavigation>()
 
     init {
-        viewState.value = HomeViewState()
+        viewState.value = TasksViewState()
     }
 
     fun onAddClick() {
-        navigationAction.sendAction(HomeNavigation.AddTodo())
+        navigationAction.sendAction(TasksNavigation.AddTask())
     }
 
     fun onTodoItemClick(todoId: Int) {
-        navigationAction.sendAction(HomeNavigation.Detail(todoId))
+        navigationAction.sendAction(TasksNavigation.Detail(todoId))
     }
 
     fun onItemDelete(todo: Todo) {
         repository.deleteTask(todo)
     }
 
-    fun getViewState(status: Int): LiveData<HomeViewState> = Transformations.switchMap(
+    fun getViewState(status: Int): LiveData<TasksViewState> = Transformations.switchMap(
             repository.getTasks(status), this::updateViewState)
 
     private fun getCurrentViewState() = viewState.value!!
 
-    private fun updateViewState(tasksList: List<Todo>?): LiveData<HomeViewState> {
-        if (getCurrentViewState().todos != tasksList) {
+    private fun updateViewState(tasksList: List<Todo>?): LiveData<TasksViewState> {
+        if (getCurrentViewState().tasks != tasksList) {
             val isEmptyList = tasksList?.isEmpty() ?: true
             viewState.value = getCurrentViewState().copy(isEmptyList = isEmptyList,
-                    todos = tasksList ?: ArrayList())
+                    tasks = tasksList ?: ArrayList())
         }
 
         return viewState

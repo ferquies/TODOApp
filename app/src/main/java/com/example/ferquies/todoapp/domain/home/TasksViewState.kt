@@ -8,5 +8,5 @@ import com.example.ferquies.todoapp.domain.database.Todo
  * Twitter: @ferquies
  * 1/22/18
  */
-data class HomeViewState(val isEmptyList: Boolean = true,
-        val todos: List<Todo> = ArrayList())
+data class TasksViewState(val isEmptyList: Boolean = true,
+        val tasks: List<Todo> = ArrayList())
