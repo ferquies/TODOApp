@@ -37,7 +37,12 @@ class TaskListAdapter @Inject constructor(private val callback: TaskListAdapter.
         val todo = todoList[position]
         todoList.removeAt(position)
         notifyItemRemoved(position)
-        callback.onItemDismiss(todo)
+        callback.onItemDismiss(todo, position)
+    }
+
+    fun onItemRestored(task: Todo, position: Int) {
+        todoList.add(position, task)
+        notifyItemInserted(position)
     }
 
     override fun onItemNextState(position: Int) {
@@ -79,7 +84,7 @@ class TaskListAdapter @Inject constructor(private val callback: TaskListAdapter.
     interface Callback {
         fun onItemClick(todo: Todo)
 
-        fun onItemDismiss(todo: Todo): Boolean
+        fun onItemDismiss(todo: Todo, position: Int): Boolean
 
         fun onItemNextState(todo: Todo): Boolean
 

@@ -3,7 +3,9 @@ package com.example.ferquies.todoapp.view.tasks
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -20,6 +22,7 @@ import com.example.ferquies.todoapp.view.detail.DetailActivity
 import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
 import kotlinx.android.synthetic.main.fragment_home.addTodoButton
 import kotlinx.android.synthetic.main.fragment_home.noTodos
+import kotlinx.android.synthetic.main.fragment_home.taskConstraintLayout
 import kotlinx.android.synthetic.main.fragment_home.todoList
 import javax.inject.Inject
 
@@ -44,6 +47,7 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
     lateinit var touchHelper: ItemTouchHelper
 
     private lateinit var viewModel: TasksFragmentViewModel
+    private var isUndo = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
@@ -110,8 +114,24 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
         viewModel.onTodoItemClick(todo.id)
     }
 
-    override fun onItemDismiss(todo: Todo): Boolean {
-        viewModel.onItemDelete(todo)
+    override fun onItemDismiss(todo: Todo, position: Int): Boolean {
+        val snackbar = Snackbar.make(taskConstraintLayout, "Task removed", Snackbar.LENGTH_LONG)
+        snackbar.setAction("UNDO", {
+            isUndo = true
+            adapter.onItemRestored(todo, position)
+        })
+        snackbar.setActionTextColor(Color.YELLOW)
+        snackbar.addCallback(object : Snackbar.Callback() {
+            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                if (!isUndo) {
+                    viewModel.onItemDelete(todo)
+                }
+
+                isUndo = false
+            }
+        })
+        snackbar.show()
+
         return true
     }
 
