@@ -4,7 +4,7 @@
     android:id="@+id/taskConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ferquies.todoapp.view.tasks.TasksFragment"
+    tools:context="com.example.ferquies.todoapp.ui.tasks.TasksFragment"
     >
 
   <TextView

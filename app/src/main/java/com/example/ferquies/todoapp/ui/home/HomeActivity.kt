@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.home
+package com.example.ferquies.todoapp.ui.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,8 +11,8 @@ import com.example.ferquies.todoapp.R.id
 import com.example.ferquies.todoapp.R.string
 import com.example.ferquies.todoapp.base.BaseActivity
 import com.example.ferquies.todoapp.base.inTransaction
-import com.example.ferquies.todoapp.view.detail.DetailActivity
-import com.example.ferquies.todoapp.view.tasks.TasksFragment
+import com.example.ferquies.todoapp.ui.detail.DetailActivity
+import com.example.ferquies.todoapp.ui.tasks.TasksFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector

@@ -1,10 +1,10 @@
-package com.example.ferquies.todoapp.view.tasks
+package com.example.ferquies.todoapp.ui.tasks
 
 import android.content.Context
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.ferquies.todoapp.di.scope.ActivityScope
-import com.example.ferquies.todoapp.view.tasks.adapter.ItemTouchHelperCallback
-import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
+import com.example.ferquies.todoapp.ui.tasks.adapter.ItemTouchHelperCallback
+import com.example.ferquies.todoapp.ui.tasks.adapter.TaskListAdapter
 import dagger.Module
 import dagger.Provides
 

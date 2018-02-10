@@ -1,9 +1,9 @@
 package com.example.ferquies.todoapp.di.module
 
-import com.example.ferquies.todoapp.view.home.HomeActivity
-import com.example.ferquies.todoapp.view.tasks.TasksFragmentProvider
-import com.example.ferquies.todoapp.view.detail.DetailActivity
-import com.example.ferquies.todoapp.view.detail.DetailFragmentProvider
+import com.example.ferquies.todoapp.ui.home.HomeActivity
+import com.example.ferquies.todoapp.ui.tasks.TasksFragmentProvider
+import com.example.ferquies.todoapp.ui.detail.DetailActivity
+import com.example.ferquies.todoapp.ui.detail.DetailFragmentProvider
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.tasks
+package com.example.ferquies.todoapp.ui.tasks
 
 import com.example.ferquies.todoapp.di.scope.ActivityScope
 import dagger.Module

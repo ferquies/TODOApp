@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.tasks.adapter
+package com.example.ferquies.todoapp.ui.tasks.adapter
 
 import android.content.Context
 import android.graphics.Bitmap

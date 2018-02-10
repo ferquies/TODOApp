@@ -14,6 +14,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
+
     <include layout="@layout/generic_activity"/>
 
     <android.support.design.widget.FloatingActionButton
@@ -26,6 +27,7 @@
         android:layout_marginRight="16dp"
         android:src="@android:drawable/ic_input_add"
         android:tint="@android:color/white"
+        app:layout_anchor="@+id/container"
         app:layout_anchorGravity="bottom|end"
         />
   </android.support.design.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.tasks
+package com.example.ferquies.todoapp.ui.tasks
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -25,10 +25,6 @@ class TasksFragmentViewModel @Inject constructor(private val repository: Reposit
 
     init {
         viewState.value = TasksViewState()
-    }
-
-    fun onAddClick() {
-        navigationAction.sendAction(TasksNavigation.AddTask())
     }
 
     fun onTodoItemClick(todoId: Int) {

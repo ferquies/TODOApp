@@ -4,8 +4,8 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.ferquies.todoapp.base.ViewModelFactory
 import com.example.ferquies.todoapp.di.ViewModelKey
-import com.example.ferquies.todoapp.view.tasks.TasksFragmentViewModel
-import com.example.ferquies.todoapp.view.detail.DetailFragmentViewModel
+import com.example.ferquies.todoapp.ui.tasks.TasksFragmentViewModel
+import com.example.ferquies.todoapp.ui.detail.DetailFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

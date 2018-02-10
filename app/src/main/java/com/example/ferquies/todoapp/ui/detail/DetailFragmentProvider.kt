@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.detail
+package com.example.ferquies.todoapp.ui.detail
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.tasks
+package com.example.ferquies.todoapp.ui.tasks
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -18,8 +18,8 @@ import com.example.ferquies.todoapp.base.getViewModel
 import com.example.ferquies.todoapp.domain.database.Todo
 import com.example.ferquies.todoapp.domain.task.TasksNavigation
 import com.example.ferquies.todoapp.domain.task.TasksViewState
-import com.example.ferquies.todoapp.view.detail.DetailActivity
-import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
+import com.example.ferquies.todoapp.ui.detail.DetailActivity
+import com.example.ferquies.todoapp.ui.tasks.adapter.TaskListAdapter
 import kotlinx.android.synthetic.main.fragment_home.noTodos
 import kotlinx.android.synthetic.main.fragment_home.todoList
 import javax.inject.Inject

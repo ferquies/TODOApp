@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.view.tasks.adapter
+package com.example.ferquies.todoapp.ui.tasks.adapter
 
 /**
  * Created by Fernando Q. Esquitino
