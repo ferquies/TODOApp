@@ -134,7 +134,7 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
     override fun onPause() {
         super.onPause()
 
-        if (snackbar?.isShown!!) {
+        if (snackbar?.isShown ?: false) {
             snackbar?.dismiss()
         }
     }
