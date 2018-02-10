@@ -34,7 +34,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideTravelDao(todoDatabase: TodoDatabase): TodoDao = todoDatabase.todoDao()
+    fun provideTaskDao(todoDatabase: TodoDatabase): TodoDao = todoDatabase.todoDao()
 
     @Singleton
     @Provides

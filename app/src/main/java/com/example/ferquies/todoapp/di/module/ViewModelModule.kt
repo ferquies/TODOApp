@@ -26,7 +26,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(DetailFragmentViewModel::class)
-    abstract fun bindTravelDetailFragmentViewModel(
+    abstract fun bindTaskDetailFragmentViewModel(
             viewModel: DetailFragmentViewModel): ViewModel
 
     @Binds

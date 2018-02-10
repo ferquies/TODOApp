@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.domain.home
+package com.example.ferquies.todoapp.domain.task
 
 /**
  * Created by Fernando Q. Esquitino
@@ -7,7 +7,5 @@ package com.example.ferquies.todoapp.domain.home
  * 1/21/18
  */
 sealed class TasksNavigation {
-    class AddTask : TasksNavigation()
-
     class Detail constructor(val taskId: Int) : TasksNavigation()
 }

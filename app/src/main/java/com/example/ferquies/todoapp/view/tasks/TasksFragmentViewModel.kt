@@ -7,8 +7,8 @@ import android.arch.lifecycle.ViewModel
 import com.example.ferquies.todoapp.base.ActionLiveData
 import com.example.ferquies.todoapp.data.Repository
 import com.example.ferquies.todoapp.domain.database.Todo
-import com.example.ferquies.todoapp.domain.home.TasksNavigation
-import com.example.ferquies.todoapp.domain.home.TasksViewState
+import com.example.ferquies.todoapp.domain.task.TasksNavigation
+import com.example.ferquies.todoapp.domain.task.TasksViewState
 import javax.inject.Inject
 
 /**

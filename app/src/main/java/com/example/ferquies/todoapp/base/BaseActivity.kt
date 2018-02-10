@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.ferquies.todoapp.utils.NetworkUtils
 import dagger.android.AndroidInjection
@@ -43,4 +44,6 @@ abstract class BaseActivity : AppCompatActivity() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
     }
+
+    abstract fun getRootView(): View
 }

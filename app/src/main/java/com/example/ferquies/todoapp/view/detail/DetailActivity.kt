@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.MenuItem
+import android.view.View
 import com.example.ferquies.todoapp.R
 import com.example.ferquies.todoapp.base.BaseActivity
 import com.example.ferquies.todoapp.base.inTransaction
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.generic_activity.root
 import kotlinx.android.synthetic.main.generic_activity.toolbar
 import javax.inject.Inject
 
@@ -57,14 +59,16 @@ class DetailActivity : BaseActivity(), HasSupportFragmentInjector {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun getRootView(): View = root
+
     private fun obtainTodoId() = intent.extras.getInt(TODO_DETAIL_ARG)
 
     companion object {
         private const val TODO_DETAIL_ARG = "todo_id"
 
-        fun newIntent(context: Context, travelId: Int = -1): Intent {
+        fun newIntent(context: Context, taskId: Int = -1): Intent {
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(TODO_DETAIL_ARG, travelId)
+            intent.putExtra(TODO_DETAIL_ARG, taskId)
             return intent
         }
     }

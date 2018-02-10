@@ -1,4 +1,4 @@
-package com.example.ferquies.todoapp.domain.home
+package com.example.ferquies.todoapp.domain.task
 
 import com.example.ferquies.todoapp.domain.database.Todo
 

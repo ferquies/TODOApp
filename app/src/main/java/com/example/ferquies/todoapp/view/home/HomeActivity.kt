@@ -5,15 +5,19 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import android.view.View
 import com.example.ferquies.todoapp.R
 import com.example.ferquies.todoapp.R.id
 import com.example.ferquies.todoapp.R.string
 import com.example.ferquies.todoapp.base.BaseActivity
 import com.example.ferquies.todoapp.base.inTransaction
+import com.example.ferquies.todoapp.view.detail.DetailActivity
 import com.example.ferquies.todoapp.view.tasks.TasksFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.activity_home.addTodoButton
+import kotlinx.android.synthetic.main.activity_home.coordinatorLayout
 import kotlinx.android.synthetic.main.activity_home.drawerLayout
 import kotlinx.android.synthetic.main.activity_home.navigation
 import kotlinx.android.synthetic.main.generic_activity.toolbar
@@ -56,6 +60,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private fun initializeView() {
         initializeToolbar()
+        hookEvents()
         hookMenuEvents()
         supportFragmentManager.inTransaction {
             replace(id.container,
@@ -70,6 +75,12 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
                 string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+    }
+
+    private fun hookEvents() {
+        addTodoButton.setOnClickListener {
+            navigateToAddTask()
+        }
     }
 
     private fun hookMenuEvents() {
@@ -93,5 +104,11 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         return true
     }
 
+    private fun navigateToAddTask() {
+        startActivity(DetailActivity.newIntent(applicationContext))
+    }
+
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
+
+    override fun getRootView(): View = coordinatorLayout
 }

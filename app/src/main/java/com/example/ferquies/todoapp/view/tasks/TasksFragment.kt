@@ -16,13 +16,11 @@ import com.example.ferquies.todoapp.R
 import com.example.ferquies.todoapp.base.BaseFragment
 import com.example.ferquies.todoapp.base.getViewModel
 import com.example.ferquies.todoapp.domain.database.Todo
-import com.example.ferquies.todoapp.domain.home.TasksNavigation
-import com.example.ferquies.todoapp.domain.home.TasksViewState
+import com.example.ferquies.todoapp.domain.task.TasksNavigation
+import com.example.ferquies.todoapp.domain.task.TasksViewState
 import com.example.ferquies.todoapp.view.detail.DetailActivity
 import com.example.ferquies.todoapp.view.tasks.adapter.TaskListAdapter
-import kotlinx.android.synthetic.main.fragment_home.addTodoButton
 import kotlinx.android.synthetic.main.fragment_home.noTodos
-import kotlinx.android.synthetic.main.fragment_home.taskConstraintLayout
 import kotlinx.android.synthetic.main.fragment_home.todoList
 import javax.inject.Inject
 
@@ -69,7 +67,6 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
 
         viewModel.navigationAction.observe(this, Observer {
             when (it) {
-                is TasksNavigation.AddTask -> navigateToAddTask()
                 is TasksNavigation.Detail -> navigateToTaskDetail(it.taskId)
             }
         })
@@ -77,8 +74,6 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
         todoList.layoutManager = LinearLayoutManager(activity)
         todoList.adapter = adapter
         touchHelper.attachToRecyclerView(todoList)
-
-        hookEvents()
     }
 
     private fun render(viewState: TasksViewState) {
@@ -96,16 +91,6 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
         adapter.setItems(viewState.tasks)
     }
 
-    private fun hookEvents() {
-        addTodoButton.setOnClickListener {
-            viewModel.onAddClick()
-        }
-    }
-
-    private fun navigateToAddTask() {
-        startActivity(DetailActivity.newIntent(applicationContext))
-    }
-
     private fun navigateToTaskDetail(taskId: Int) {
         startActivity(DetailActivity.newIntent(applicationContext, taskId))
     }
@@ -115,7 +100,8 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
     }
 
     override fun onItemDismiss(todo: Todo, position: Int): Boolean {
-        val snackbar = Snackbar.make(taskConstraintLayout, "Task removed", Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(baseActivity!!.getRootView(), "Task removed",
+                Snackbar.LENGTH_LONG)
         snackbar.setAction("UNDO", {
             isUndo = true
             adapter.onItemRestored(todo, position)

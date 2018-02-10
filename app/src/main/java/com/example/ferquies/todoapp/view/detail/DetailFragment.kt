@@ -44,7 +44,7 @@ class DetailFragment : BaseFragment() {
 
     private fun initializeView() {
         viewModel = getViewModel(DetailFragmentViewModel::class.java, viewModelFactory)
-        viewModel.todoId = obtainTravelId()
+        viewModel.todoId = obtainTaskId()
 
         viewModel.getViewState().observe(this, Observer {
             render(it!!)
@@ -62,9 +62,9 @@ class DetailFragment : BaseFragment() {
             true -> {
                 title.text = getString(R.string.edit_todo)
                 saveButton.setOnClickListener {
-                    val travel = viewState.todo.copy(title = titleEditText.text.toString(),
+                    val task = viewState.todo.copy(title = titleEditText.text.toString(),
                             detail = detailEditText.text.toString())
-                    viewModel.updateTodo(travel)
+                    viewModel.updateTodo(task)
                 }
             }
             false -> {
@@ -79,15 +79,15 @@ class DetailFragment : BaseFragment() {
         detailEditText.setText(viewState.todo.detail)
     }
 
-    private fun obtainTravelId(): Int = arguments.getInt(TODO_DETAIL_ARG)
+    private fun obtainTaskId(): Int = arguments.getInt(TODO_DETAIL_ARG)
 
     companion object {
         private const val TODO_DETAIL_ARG = "todo_id"
 
-        fun newInstance(travelId: Int = -1): Fragment {
+        fun newInstance(taskId: Int = -1): Fragment {
             val fragment = DetailFragment()
             val bundle = Bundle()
-            bundle.putInt(TODO_DETAIL_ARG, travelId)
+            bundle.putInt(TODO_DETAIL_ARG, taskId)
             fragment.arguments = bundle
             return fragment
         }
