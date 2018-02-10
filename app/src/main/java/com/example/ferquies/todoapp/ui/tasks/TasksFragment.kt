@@ -45,6 +45,7 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
     lateinit var touchHelper: ItemTouchHelper
 
     private lateinit var viewModel: TasksFragmentViewModel
+    private var snackbar: Snackbar? = null
     private var isUndo = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -100,14 +101,14 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
     }
 
     override fun onItemDismiss(todo: Todo, position: Int): Boolean {
-        val snackbar = Snackbar.make(baseActivity!!.getRootView(), "Task removed",
+        snackbar = Snackbar.make(baseActivity!!.getRootView(), "Task removed",
                 Snackbar.LENGTH_LONG)
-        snackbar.setAction("UNDO", {
+        snackbar?.setAction("UNDO", {
             isUndo = true
             adapter.onItemRestored(todo, position)
         })
-        snackbar.setActionTextColor(Color.YELLOW)
-        snackbar.addCallback(object : Snackbar.Callback() {
+        snackbar?.setActionTextColor(Color.YELLOW)
+        snackbar?.addCallback(object : Snackbar.Callback() {
             override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                 if (!isUndo) {
                     viewModel.onItemDelete(todo)
@@ -116,7 +117,7 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
                 isUndo = false
             }
         })
-        snackbar.show()
+        snackbar?.show()
 
         return true
     }
@@ -128,6 +129,14 @@ class TasksFragment : BaseFragment(), TaskListAdapter.Callback {
 
     override fun onItemMoved(tasks: List<Todo>) {
         viewModel.changePosition(tasks)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if (snackbar?.isShown!!) {
+            snackbar?.dismiss()
+        }
     }
 
     private fun obtainStatus() = arguments.getInt(STATUS_ARG)
